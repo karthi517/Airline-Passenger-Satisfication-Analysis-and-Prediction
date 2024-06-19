@@ -12,10 +12,10 @@ def Home():
 
 @flask_app.route("/predict", methods = ["POST"])
 def predict():
-    float_features = [float(x) for x in request.form.values().split(',')]
+    float_features = [float(x) for x in request.form.values()]
     features = [np.array(float_features)]
-    prediction = model.predict(features)
-    return render_template("index.html", prediction_text = "The flower species is {}".format(prediction))
+    prediction = model.predict(features)[0]
+    return render_template("index.html", prediction_text = "The customer is {}".format(prediction))
 
 if __name__ == "__main__":
     flask_app.run(debug=True)
